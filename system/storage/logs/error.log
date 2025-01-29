@@ -1,0 +1,2 @@
+2024-10-03 7:40:41 - PHP Warning:  unlink(D:/server6/OSPanel/home/opencart3/system/storage/cache/cache.ocfilter.option.27.1.1.1727941165): No such file or directory in D:\server6\OSPanel\home\opencart3\system\library\cache\file.php on line 17
+2024-10-03 14:42:21 - PHP Notice:  Undefined index: status in D:\server6\OSPanel\home\opencart3\admin\controller\extension\module\ocfilter.php on line 946
