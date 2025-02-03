@@ -48,8 +48,10 @@ class ControllerExtensionModuleFeatured extends Controller {
 
 					if ($this->config->get('config_review_status')) {
 						$rating = $product_info['rating'];
+						$reviews = $product_info['reviews'];
 					} else {
 						$rating = false;
+						$review = false;
 					}
 
 					$data['products'][] = array(
@@ -61,11 +63,14 @@ class ControllerExtensionModuleFeatured extends Controller {
 						'special'     => $special,
 						'tax'         => $tax,
 						'rating'      => $rating,
+						'reviews'      => $reviews,
 						'href'        => $this->url->link('product/product', 'product_id=' . $product_info['product_id'])
 					);
 				}
 			}
 		}
+
+        $data['title'] = $this->language->get("{$setting['name']}_title");
 
 		if ($data['products']) {
 			return $this->load->view('extension/module/featured', $data);

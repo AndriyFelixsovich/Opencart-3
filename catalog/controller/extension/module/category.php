@@ -51,11 +51,19 @@ class ControllerExtensionModuleCategory extends Controller {
 				'filter_sub_category' => true
 			);
 
+            if($category['image']) {
+                $image = $this->model_tool_image->resize($category['image'], 150,150);
+            } else {
+                $image = $this->model_tool_image->resize('placeholder.png', 150,150);
+            }
+
 			$data['categories'][] = array(
-				'category_id' => $category['category_id'],
-				'name'        => $category['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($filter_data) . ')' : ''),
-				'children'    => $children_data,
-				'href'        => $this->url->link('product/category', 'path=' . $category['category_id'])
+				'category_id'       => $category['category_id'],
+				'name'              => $category['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($filter_data) . ')' : ''),
+				'children'          => $children_data,
+				'href'              => $this->url->link('product/category', 'path=' . $category['category_id']),
+                'image'             => $image,
+                'total_products'    => $this->model_catalog_product->getTotalProducts($filter_data)
 			);
 		}
 

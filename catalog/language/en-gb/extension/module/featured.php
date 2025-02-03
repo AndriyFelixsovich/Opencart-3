@@ -1,6 +1,7 @@
 <?php
 // Heading
-$_['heading_title'] = 'Featured';
+$_['featured_title'] = 'Featured';
+$_['recent_title'] =   'Recent';
 
 // Text
 $_['text_tax']      = 'Ex Tax:';
