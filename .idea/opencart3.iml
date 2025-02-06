@@ -2,10 +2,15 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/.osp/system/library" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/system/library" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/system/storage/modification/system/library" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/catalog/view/theme/default/template/extension/module/ocfilter" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/deprecation-contracts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-mbstring" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php80" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-php81" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/twig/twig" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
