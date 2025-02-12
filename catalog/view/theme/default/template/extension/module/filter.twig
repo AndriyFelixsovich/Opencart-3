@@ -20,13 +20,45 @@
   </div>
 </div>
 <script type="text/javascript"><!--
-$('#button-filter').on('click', function() {
-	filter = [];
+  /*$('#button-filter').on('click', function() {
+      filter = [];
 
-	$('input[name^=\'filter\']:checked').each(function(element) {
-		filter.push(this.value);
-	});
+      $('input[name^=\'filter\']:checked').each(function(element) {
+          filter.push(this.value);
+      });
 
-	location = '{{ action }}&filter=' + filter.join(',');
-});
-//--></script> 
+      location = '{{ action }}&filter=' + filter.join(',');
+});*/
+
+  $('.filter-block input').on('change', function () {
+    let filter = [];
+    $('input[name^=\'filter\']:checked').each(function (element) {
+      filter.push(this.value);
+    });
+    let url = '{{ action }}&filter=' + filter.join(',');
+    let loader = $('.ajax-loader');
+    $.ajax({
+      url: url,
+      type: 'GET',
+      data: {url: url},
+      beforeSend: function () {
+        loader.fadeIn();
+      },
+      success: function (json) {
+        loader.fadeOut(300, function () {
+          let res = JSON.parse(json);
+          history.pushState({}, '', res.url);
+          $('.products-items-sort').html(res.sorts);
+          $('.product-items').html(res.products);
+          $('.nav-pagination').html(res.pagination);
+          console.log(res);
+        });
+      },
+      error: function () {
+        alert('Error!');
+      }
+    });
+  });
+
+
+  //--></script>
