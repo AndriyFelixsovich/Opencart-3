@@ -346,6 +346,47 @@ class ControllerExtensionCtmenu extends Controller
         $this->response->setOutput($this->load->view('extension/ctmenu/menu_link_form', $data));
     }
 
+    /**
+     * Delete menu links
+     */
+    public function deleteMenuLink()
+    {
+        if (isset($this->request->get['menu_link_id']) && $this->validateDelete()) {
+            $this->load->model('extension/ctmenu');
+            $this->load->language('extension/ctmenu');
+            $menu_link = $this->model_extension_ctmenu->getMenuLinkByLinkId($this->request->get['menu_link_id']);
+            $menu_id = $menu_link['menu_id'];
+            if ($this->model_extension_ctmenu->deleteMenuLink($this->request->get['menu_link_id'])) {
+                $this->session->data['success'] = $this->language->get('text_success');
+            } else {
+                $this->session->data['error'] = $this->language->get('error_delete_menu');
+            }
+            $this->response->redirect($this->url->link('extension/ctmenu/view-menu-links', "user_token={$this->session->data['user_token']}&menu_id={$menu_id}", true));
+        }
+
+        $this->index();
+    }
+
+    /**
+     * Edit menu links
+     */
+    public function editMenuLink()
+    {
+        $this->load->language('extension/ctmenu');
+        $this->document->setTitle($this->language->get('heading_title'));
+        $this->load->model('extension/ctmenu');
+
+        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateMenuLinkForm()) {
+            // save form
+            $this->model_extension_ctmenu->editMenuLink($this->request->get['menu_link_id'], $this->request->post);
+            $this->session->data['success'] = $this->language->get('text_success');
+            $menu_link = $this->model_extension_ctmenu->getMenuLinkByLinkId($this->request->get['menu_link_id']);
+            $this->response->redirect($this->url->link('extension/ctmenu/view-menu-links', "user_token={$this->session->data['user_token']}&menu_id={$menu_link['menu_id']}", true));
+        }
+
+        $this->getMenuLinkForm();
+    }
+
 
     private function treeToHtml($tree, $tpl = 'list', $tab = '', $parent_id = 0){
         $str = '';
